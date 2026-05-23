@@ -1,9 +1,11 @@
 package vallegrande.edu.pe.gitFlow242s3_t06_be.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import vallegrande.edu.pe.gitFlow242s3_t06_be.model.Task;
 import vallegrande.edu.pe.gitFlow242s3_t06_be.repository.TaskRepository;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class TaskService {
