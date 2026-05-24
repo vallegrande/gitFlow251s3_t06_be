@@ -44,6 +44,7 @@ public class TaskService {
      * Actualizar una tarea existente
      */
     public Task updateTask(Long id, Task taskDetails) {
+<<<<<<< HEAD
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tarea no encontrada con ID: " + id));
         
@@ -57,6 +58,16 @@ public class TaskService {
     /**
      * Eliminar una tarea por ID
      */
+=======
+    Task task = taskRepository.findById(id).orElseThrow();
+    task.setTitle(taskDetails.getTitle());
+    task.setDescription(taskDetails.getDescription());
+    task.setStatus(taskDetails.getStatus());
+    return taskRepository.save(task);
+    }
+
+
+>>>>>>> faf7bababa2e48d9fd274e2b0b1a19d4abc7868b
     public void deleteTask(Long id) {
         if (!taskRepository.existsById(id)) {
             throw new RuntimeException("Tarea no encontrada con ID: " + id);

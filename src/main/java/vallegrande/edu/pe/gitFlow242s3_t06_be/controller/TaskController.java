@@ -87,10 +87,6 @@ public class TaskController {
         }
     }
 
-    /**
-     * Eliminar una tarea por ID
-     * DELETE /api/tasks/{id}
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteTask(@PathVariable Long id) {
         try {
