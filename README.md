@@ -1,266 +1,194 @@
-# Task Manager Backend - GitFlow Practice
+# 📋 Gestor de Tareas - API REST
 
-## 📋 Descripción del Proyecto
+Un proyecto de gestión de tareas desarrollado con **Spring Boot** siguiendo las mejores prácticas de **Gitflow** y **Conventional Commits**.
 
-Aplicación backend desarrollada con **Spring Boot** para gestionar tareas (CRUD completo). Este proyecto forma parte de la práctica de **GitFlow** y **Conventional Commits** del laboratorio académico.
+---
+
+## ✨ Características
+
+### Backend (dev1) - API REST
+- ✅ **Crear tareas** - Endpoint POST `/api/tasks`
+- ✅ **Listar tareas** - Endpoint GET `/api/tasks`
+- ✅ **Actualizar tareas** - Endpoint PUT `/api/tasks/{id}`
+- ✅ **Eliminar tareas** - Endpoint DELETE `/api/tasks/{id}`
+
+### Frontend (dev2) - Interfaz Angular
+- ✅ **Formulario de creación** - Crear nuevas tareas
+- ✅ **Lista de tareas** - Visualizar todas las tareas con filtros
+- ✅ **Edición de tareas** - Modificar tareas existentes
+- ✅ **Eliminación de tareas** - Eliminar tareas del sistema
+
+---
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Java 17**
-- **Spring Boot 3.2.1**
-- **Spring Data JPA**
-- **SQL Server 2022**
-- **Maven**
-- **Lombok**
+| Componente | Tecnología | Versión |
+|----------|-----------|---------|
+| Backend | Spring Boot | 3.x |
+| Base de Datos | SQL Server | 2022 |
+| Frontend | Angular | 16+ |
+| Build Tool | Maven | 3.9+ |
+| Lenguaje | Java | 17 |
 
-## 📦 Dependencias Principales
+---
 
-```xml
-- spring-boot-starter-web
-- spring-boot-starter-data-jpa
-- mssql-jdbc
-- lombok
-```
-
-## 🚀 Requisitos Previos
-
-Antes de ejecutar el proyecto, asegúrate de tener instalado:
-
-1. **Java JDK 17** o superior
-2. **Maven 3.6+**
-3. **SQL Server 2022** (o Docker con SQL Server)
-4. **Git**
-
-## 🗄️ Configuración de Base de Datos
-
-### Opción 1: Docker (Recomendado)
-
-```bash
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Password123@" -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
-```
-
-### Opción 2: SQL Server Local
-
-1. Instalar SQL Server 2022
-2. Crear la base de datos `task_manager`
-3. Configurar usuario `sa` con contraseña `Password123@`
-
-### Configuración en `application.properties`
-
-```properties
-spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=task_manager;encrypt=true;trustServerCertificate=true
-spring.datasource.username=sa
-spring.datasource.password=Password123@
-```
-
-## 📂 Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
 ```
 gitFlow251s3_t06_be/
 ├── src/
 │   ├── main/
-│   │   ├── java/
-│   │   │   └── vallegrande/edu/pe/gitFlow242s3_t06_be/
-│   │   │       ├── controller/
-│   │   │       │   └── TaskController.java
-│   │   │       ├── model/
-│   │   │       │   └── Task.java
-│   │   │       ├── repository/
-│   │   │       │   └── TaskRepository.java
-│   │   │       ├── service/
-│   │   │       │   └── TaskService.java
-│   │   │       └── GitFlow242s3T06BeApplication.java
+│   │   ├── java/vallegrande/edu/pe/gitFlow242s3_t06_be/
+│   │   │   ├── controller/          # Controllers REST
+│   │   │   ├── model/               # Entidades
+│   │   │   ├── repository/          # Acceso a datos
+│   │   │   ├── service/             # Lógica de negocios
+│   │   │   ├── exception/           # Manejo de excepciones
+│   │   │   └── config/              # Configuraciones (CORS, etc)
 │   │   └── resources/
 │   │       └── application.properties
 │   └── test/
-├── pom.xml
-└── README.md
+│       └── java/                    # Tests unitarios
+├── pom.xml                          # Dependencias Maven
+└── README.md                        # Este archivo
 ```
 
-## ⚙️ Instalación y Ejecución
+---
 
-### 1. Clonar el repositorio
+## 🚀 Requisitos Previos
 
+- **Java JDK 17** o superior
+- **Maven 3.9+**
+- **SQL Server 2022** (o Docker)
+- **Angular CLI** (para frontend)
+- **Node.js 16+** (para frontend)
+
+---
+
+## ⚙️ Configuración
+
+### 1. Base de Datos
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd gitFlow251s3_t06_be
+# Con Docker
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Password123@" \
+  -p 1433:1433 --name sqlserver -d \
+  mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-### 2. Compilar el proyecto
+### 2. Backend - Variables de Entorno
+Editar `src/main/resources/application.properties`:
+```properties
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=task_manager
+spring.datasource.username=sa
+spring.datasource.password=Password123@
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
+---
+
+## 📦 Instalación y Ejecución
+
+### Backend
 ```bash
+# Compilar el proyecto
 mvn clean install
-```
 
-### 3. Ejecutar la aplicación
-
-```bash
+# Ejecutar la aplicación
 mvn spring-boot:run
+
+# La API estará disponible en: http://localhost:8080/api/tasks
 ```
 
-La aplicación estará disponible en: `http://localhost:8080`
+### Frontend
+```bash
+# Instalar dependencias
+npm install
 
-## 🔌 Endpoints de la API
+# Iniciar servidor de desarrollo
+ng serve
 
-### Base URL: `http://localhost:8080/api/tasks`
+# Acceder en: http://localhost:4200
+```
+
+---
+
+## 🔄 Gitflow y Conventional Commits
+
+Este proyecto implementa:
+
+- **Ramas principales:**
+  - `main` - Producción
+  - `develop` - Integración
+
+- **Ramas de features:**
+  - `feature/sp8-us1_createTasks` - Crear tareas (dev1)
+  - `feature/sp8-us2_listTasks` - Listar tareas (dev2)
+  - `feature/sp8-us5_updateTasks` - Actualizar tareas (dev1)
+  - `feature/sp8-us6_eliminateTasks` - Eliminar tareas (dev2)
+
+- **Commits con estándar Conventional:**
+  - `feat(backend): agregar endpoint para crear tareas`
+  - `fix(backend): corregir validación de estado`
+  - `style(frontend): ajustar estilos de formulario`
+
+---
+
+## 📝 Endpoints de la API
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| `POST` | `/api/tasks` | Crear una nueva tarea |
-| `GET` | `/api/tasks` | Obtener todas las tareas |
-| `GET` | `/api/tasks/{id}` | Obtener una tarea por ID |
-| `PUT` | `/api/tasks/{id}` | Actualizar una tarea |
-| `DELETE` | `/api/tasks/{id}` | Eliminar una tarea |
+| GET | `/api/tasks` | Obtener todas las tareas |
+| POST | `/api/tasks` | Crear nueva tarea |
+| PUT | `/api/tasks/{id}` | Actualizar tarea |
+| DELETE | `/api/tasks/{id}` | Eliminar tarea |
 
-### Ejemplos de Uso
-
-#### Crear Tarea (POST)
-
+### Ejemplo de Solicitud
 ```bash
+# Crear tarea
 curl -X POST http://localhost:8080/api/tasks \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Tarea de ejemplo",
+    "title": "Mi primera tarea",
     "description": "Descripción de la tarea",
     "status": "pendiente"
   }'
 ```
 
-#### Obtener Todas las Tareas (GET)
+---
+
+## ✅ Testing
 
 ```bash
-curl http://localhost:8080/api/tasks
-```
-
-#### Actualizar Tarea (PUT)
-
-```bash
-curl -X PUT http://localhost:8080/api/tasks/1 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Tarea actualizada",
-    "description": "Nueva descripción",
-    "status": "completada"
-  }'
-```
-
-#### Eliminar Tarea (DELETE)
-
-```bash
-curl -X DELETE http://localhost:8080/api/tasks/1
-```
-
-## 📊 Modelo de Datos
-
-### Entidad Task
-
-```java
-{
-  "id": Long,
-  "title": String,
-  "description": String,
-  "status": String,
-  "createdAt": LocalDateTime
-}
-```
-
-## 🌿 GitFlow - Ramas
-
-Este proyecto sigue el flujo de trabajo **GitFlow**:
-
-- `main`: Rama de producción
-- `develop`: Rama de desarrollo
-- `feature/*`: Ramas de características
-  - `feature/sp8-us1_createTasks`
-  - `feature/sp8-us2_listTasks`
-  - `feature/sp8-us5_updateTasks`
-  - `feature/sp8-us6_eliminateTasks`
-
-## 📝 Conventional Commits
-
-Los commits siguen el estándar **Conventional Commits**:
-
-```
-<tipo>(<área>): <descripción breve>
-
-Tipos: feat, fix, style, refactor, chore
-```
-
-### Ejemplos:
-
-```bash
-feat(backend): add endpoint to create tasks
-feat(backend): add endpoint to list tasks
-fix(backend): correct validation in task update
-```
-
-## 🔧 Configuración CORS
-
-El backend está configurado para aceptar peticiones desde el frontend Angular:
-
-```java
-@CrossOrigin(origins = "http://localhost:4200")
-```
-
-## 🧪 Testing
-
-Ejecutar las pruebas:
-
-```bash
+# Ejecutar tests unitarios
 mvn test
+
+# Con cobertura
+mvn test jacoco:report
 ```
-
-## 📦 Compilar para Producción
-
-```bash
-mvn clean package
-```
-
-El archivo JAR se generará en: `target/gitFlow242s3_t06_be-0.0.1-SNAPSHOT.jar`
-
-## 🚀 Ejecutar JAR
-
-```bash
-java -jar target/gitFlow242s3_t06_be-0.0.1-SNAPSHOT.jar
-```
-
-## 🐛 Solución de Problemas
-
-### Error de conexión a SQL Server
-
-- Verificar que SQL Server esté ejecutándose
-- Verificar credenciales en `application.properties`
-- Verificar que el puerto 1433 esté disponible
-
-### Error de compilación Maven
-
-```bash
-mvn clean install -U
-```
-
-### Puerto 8080 en uso
-
-Cambiar el puerto en `application.properties`:
-
-```properties
-server.port=8081
-```
-
-## 👥 Autores
-
-- **dev1**: Endpoints de crear y listar tareas
-- **dev2**: Endpoints de actualizar y eliminar tareas
-
-## 📄 Licencia
-
-Este proyecto es parte de un laboratorio académico de Valle Grande.
-
-## 📞 Contacto
-
-Para consultas sobre el proyecto, contactar al equipo de desarrollo.
 
 ---
 
-**Versión**: 1.0.0  
-**Fecha**: Enero 2025  
-**Institución**: Valle Grande
+## 👥 Equipo de Desarrollo
+
+- **dev1** - Backend (Endpoints CRUD)
+- **dev2** - Frontend (Interfaz de usuario)
+
+---
+
+## 📚 Recursos Adicionales
+
+- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+- [Angular Documentation](https://angular.io/docs)
+- [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+- [Conventional Commits](https://www.conventionalcommits.org/)
+
+---
+
+## 📄 Licencia
+
+Proyecto académico - Valle Grande
+
+---
+
+**Última actualización:** Mayo 2026
